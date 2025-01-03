@@ -1,12 +1,12 @@
 import streamlit as st
 import os
 from datetime import datetime
-from dotenv import load_dotenv
 import google.generativeai as genai
 
-# Load environment variables
-load_dotenv()
-BARD_API_KEY = os.getenv("BARD_API_KEY")
+
+BARD_API_KEY = st.secrets.get("BARD_API_KEY")
+if not BARD_API_KEY:
+    raise ValueError("BARD_API_KEY  key not found. Please check your .env file.")
 
 # Configure the generative AI model
 genai.configure(api_key=BARD_API_KEY)
